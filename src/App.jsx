@@ -71,6 +71,9 @@ useEffect(() => {
     console.log("conectado ao backend");
     setIsConnected(true);
   });
+  socket.on("estado", (data) => {
+  console.log("estado recebido:", data);
+});
 }, []);
   // Carregar dados quando a data mudar ou houver atualização externa
   const loadData = async () => {
