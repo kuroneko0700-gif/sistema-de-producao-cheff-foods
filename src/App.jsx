@@ -1,3 +1,4 @@
+import socket from "./socket";
 import React, { useState, useMemo, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Plus, Trash2, FileSpreadsheet, Download, Calendar } from 'lucide-react';
@@ -65,7 +66,12 @@ export default function App() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(dataService.getConnectionStatus());
-
+useEffect(() => {
+  socket.on("connect", () => {
+    console.log("conectado ao backend");
+    setIsConnected(true);
+  });
+}, []);
   // Carregar dados quando a data mudar ou houver atualização externa
   const loadData = async () => {
     setIsLoading(true);
